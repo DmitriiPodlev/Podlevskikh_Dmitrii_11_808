@@ -1,0 +1,7 @@
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\obj\Debug\Shell_Sort.csprojAssemblyReference.cache
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\obj\Debug\Shell_Sort.csproj.CoreCompileInputs.cache
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\bin\Debug\Shell_Sort.exe.config
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\bin\Debug\Shell_Sort.exe
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\bin\Debug\Shell_Sort.pdb
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\obj\Debug\Shell_Sort.exe
+C:\Users\Дмитрий\source\repos\Shell_Sort\Shell_Sort\obj\Debug\Shell_Sort.pdb
