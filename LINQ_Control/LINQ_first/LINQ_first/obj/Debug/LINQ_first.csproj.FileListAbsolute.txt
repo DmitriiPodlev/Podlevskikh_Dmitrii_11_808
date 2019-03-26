@@ -1,0 +1,7 @@
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\bin\Debug\LINQ_first.exe.config
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\bin\Debug\LINQ_first.exe
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\bin\Debug\LINQ_first.pdb
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\obj\Debug\LINQ_first.csprojAssemblyReference.cache
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\obj\Debug\LINQ_first.csproj.CoreCompileInputs.cache
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\obj\Debug\LINQ_first.exe
+C:\Users\Дмитрий\source\repos\LINQ_first\LINQ_first\obj\Debug\LINQ_first.pdb
