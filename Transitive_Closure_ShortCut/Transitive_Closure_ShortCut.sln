@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transitive_Closure_ShortCut", "Transitive_Closure_ShortCut\Transitive_Closure_ShortCut.csproj", "{16FE7EA4-038A-4772-8F36-793F9CCCD88D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16FE7EA4-038A-4772-8F36-793F9CCCD88D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FE7EA4-038A-4772-8F36-793F9CCCD88D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FE7EA4-038A-4772-8F36-793F9CCCD88D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FE7EA4-038A-4772-8F36-793F9CCCD88D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A6EA70E-9D20-4564-BA81-0C4C9A9E2070}
+	EndGlobalSection
+EndGlobal

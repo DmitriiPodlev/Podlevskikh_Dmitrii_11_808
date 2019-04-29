@@ -1,0 +1,7 @@
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\bin\Debug\Transitive_Closure_ShortCut.exe.config
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\bin\Debug\Transitive_Closure_ShortCut.exe
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\bin\Debug\Transitive_Closure_ShortCut.pdb
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\obj\Debug\Transitive_Closure_ShortCut.csprojAssemblyReference.cache
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\obj\Debug\Transitive_Closure_ShortCut.csproj.CoreCompileInputs.cache
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\obj\Debug\Transitive_Closure_ShortCut.exe
+C:\Users\Дмитрий\source\repos\Transitive_Closure_ShortCut\Transitive_Closure_ShortCut\obj\Debug\Transitive_Closure_ShortCut.pdb
