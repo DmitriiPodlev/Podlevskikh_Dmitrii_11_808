@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<table border = "1">
+<tr>
+<th align = "left" valign = "top"><br><br><font size = "6">ITIS</font></th>
+<td align = "left">256</td>
+<td align = "center">
+<input type = "radio" checked><br>
+<input type = "radio" checked> <input type = "radio" checked><br>
+<input type = "radio" checked> <input type = "radio" checked> <input type = "radio" checked><br><br>
+<pre style="margin: 0px"><input type = "radio" checked>          <input type = "radio" checked><br></pre>
+<pre style="margin: 0px"><input type = "radio" checked> <input type = "radio" checked>      <input type = "radio" checked> <input type = "radio" checked><br></pre>
+<pre style="margin: 0px"><input type = "radio" checked> <input type = "radio" checked> <input type = "radio" checked>  <input type = "radio" checked> <input type = "radio" checked> <input type = "radio" checked></pre>
+</td>
+<th align = "left">
+query<br>
+<input type="search"><button>на Яндекс</button>
+</th>
+</tr>
+<tr>
+<td><i align = "left">0xbad</i></td>
+<th align = "left" valign = "top"><br><br><font size = "5">ITIS</font></th>
+<td align = "center">
+0<br><hr>
+O<br><hr>
+<input type = "radio" checked><br><hr>
+<a href="google.ru"><u>google.ru</u></a>
+</td>
+<td align = "left"><button>4</button> <button>8</button> <button>15</button> <button>16</button> <button>23</button> <button>42</button></td>
+</tr>
+<tr>
+<td> </td>
+<th align = "left"><a href="127.0.0.1"><u>127.0.0.1</u></a></th>
+<td align = "left">Eyjafjallajokull</td>
+<td align = "left"><a href="vk.com"><u>vk.com</u></a></td>
+</tr>
+<tr>
+<th><input type = "checkbox" checked> <input type = "checkbox"> <input type = "checkbox" checked> <input type = "checkbox"> <input type = "checkbox" checked> <input type = "checkbox"></th>
+<th align = "left" valign = "baseline"><font size = "1.5">ITIS</font></th>
+<td align = "center"><pre> ====>>> <<<==== </pre></td>
+<th align = "left" valign = "top"><font size = "4">ITIS</font></th>
+</tr>
+<tr>
+<th align = "left" valign = "top"><br><font size = "2">ITIS</font></th>
+<td align = "center" valign = "top">
+WRITE<br><br>
+<input type="search"><button>to Mail.ru</button>
+</td>
+<td align = "left">
+<input type = "radio" checked><br>
+<input type = "radio" checked><input type = "radio" checked><br>
+<input type = "radio" checked><input type = "radio" checked><input type = "radio" checked><br>
+<input type = "radio" checked><input type = "radio" checked><br>
+<input type = "radio" checked>
+</td>
+<th align = "left" valign = "top"><br>ITIS</th>
+</tr>
+<tr>
+<td> first line<br>
+second line
+</td>
+<td> first line<br><br>
+second line
+</td>
+<td> first line<br><br><br><br>
+second line
+</td>
+<td align = "left"><input type = "radio" checked><input type = "radio" checked><input type = "radio" checked><input type = "radio" checked><input type = "radio">
+</td>
+</tr>
+</table>
+</body>
+</html>
