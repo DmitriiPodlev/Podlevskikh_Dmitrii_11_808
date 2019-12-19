@@ -1,0 +1,116 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: dima
+Пароль пользователя dima:
+psql (11.5)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=> \! chcp 1251
+Текущая кодовая страница: 1251
+postgres=> \d
+                       Список отношений
+ Схема  |         Имя          |        Тип         | Владелец
+--------+----------------------+--------------------+----------
+ public | actors               | таблица            | dima
+ public | actors_count_seq     | последовательность | dima
+ public | cinema               | таблица            | lena
+ public | films                | таблица            | lena
+ public | movies               | таблица            | dima
+ public | person               | таблица            | dima
+ public | producer             | таблица            | dima
+ public | producer_counter_seq | последовательность | dima
+ public | weather              | таблица            | postgres
+(9 строк)
+
+
+postgres=> SELECT * FROM actors;
+ surname | name  |  birthday  | motherland | number_of_movies | count
+---------+-------+------------+------------+------------------+-------
+ Petrov  | Alex  | 20.05.1987 | Russia     |               20 |     1
+ Loskov  | Oleg  | 21.04.1980 | Russia     |                6 |     2
+ Smith   | Jim   | 21.04.1990 | USA        |              134 |     3
+ Adam    | Len   | 26.03.1976 | Germany    |               10 |     4
+ Jacob   | Fix   | 26.03.1998 | Slovakia   |                7 |     5
+ Petrova | Lucia | 17.08.1990 | Russia     |               16 |     6
+(6 строк)
+
+
+postgres=> SELECT * FROM producer;
+ surname | name  |  birthday  | motherland | counter
+---------+-------+------------+------------+---------
+ Petrov  | Jim   | 17.08.1990 | Russia     |       1
+ Luch    | Joke  | 17.08.1990 | Finland    |       2
+ Smith   | Joke  | 08.03.1987 | Canada     |       3
+ Aeterna | Lux   | 01.01.1964 | USA        |       4
+ Igor    | Sting | 05.10.1977 | USA        |       5
+ Join    | Xim   | 09.10.1929 | Japan      |       6
+(6 строк)
+
+
+postgres=> SELECT * FROM producer WHERE motherland = 'USA';
+ surname | name  |  birthday  | motherland | counter
+---------+-------+------------+------------+---------
+ Aeterna | Lux   | 01.01.1964 | USA        |       4
+ Igor    | Sting | 05.10.1977 | USA        |       5
+(2 строки)
+
+
+postgres=> SELECT * FROM actors WHERE number_of_movies > 7;
+ surname | name  |  birthday  | motherland | number_of_movies | count
+---------+-------+------------+------------+------------------+-------
+ Petrov  | Alex  | 20.05.1987 | Russia     |               20 |     1
+ Smith   | Jim   | 21.04.1990 | USA        |              134 |     3
+ Adam    | Len   | 26.03.1976 | Germany    |               10 |     4
+ Petrova | Lucia | 17.08.1990 | Russia     |               16 |     6
+(4 строки)
+
+
+postgres=> SELECT count FROM actors WHERE motherland = 'Russia';
+ count
+-------
+     1
+     2
+     6
+(3 строки)
+
+
+postgres=> SELECT * FROM movies;
+ name  | description | year |  genres  | country | budget | actors  | producer
+-------+-------------+------+----------+---------+--------+---------+----------
+ War   | War         | 1980 | War      | Russia  |  15000 | Petrov  | Luch
+ Joker | Thriller    | 2019 | Thriller | USA     |  15001 | Petrov  | Smith
+ Begin | Thriller    | 2017 | Thriller | USA     | 150002 | Loskov  | Join
+ Wife  | Comedy      | 2015 | Comedy   | USA     |  15003 | Adam    | Igor
+ Magic | Fantasy     | 1947 | Fantasy  | China   |  15004 | Jacob   | Aeterna
+ Joke  | Comedy      | 1958 | Comedy   | India   |  15006 | Petrova | Petrov
+(6 строк)
+
+
+postgres=> SELECT name FROM movies WHERE country = 'USA' AND actors = 'Petrov';
+ name
+-------
+ Joker
+(1 строка)
+
+
+postgres=> SELECT name FROM movies WHERE description = 'Thriller' AND actors = 'Petrov';
+ name
+-------
+ Joker
+(1 строка)
+
+
+postgres=> SELECT genres FROM movies WHERE country = 'Russia';
+ genres
+--------
+ War
+(1 строка)
+
+
+postgres=>

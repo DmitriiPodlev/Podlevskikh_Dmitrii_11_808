@@ -1,0 +1,182 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль пользователя postgres:
+psql (11.5)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=# \! chcp 1251
+Текущая кодовая страница: 1251
+postgres=# WITH RECURSIVE r AS (VALUES(1))
+postgres-# WITH RECURSIVE r AS (VALUES(1) UNION ALL SELECT n*1 FROM r WHERE n<=19) SELECT * FROM r;
+ОШИБКА:  ошибка синтаксиса (примерное положение: "WITH")
+СТРОКА 2: WITH RECURSIVE r AS (VALUES(1) UNION ALL SELECT n*1 FROM r W...
+          ^
+postgres=# WITH RECURSIVE r AS (VALUES(1) UNION SELECT n*1 FROM r WHERE n<=19) SELECT * FROM r;M
+ОШИБКА:  столбец "n" не существует
+СТРОКА 1: WITH RECURSIVE r AS (VALUES(1) UNION SELECT n*1 FROM r WHERE...
+                                                      ^
+postgres-# WITH RECURSIVE r AS (SELECT 1 AS i, 1 AS factorial UNION SELECT i+1 AS i, factorial * (i+1) AS factorial FROM r WHERE i<=19) SELECT * FROM r;
+ОШИБКА:  ошибка синтаксиса (примерное положение: "M")
+СТРОКА 1: M
+          ^
+postgres=# WITH RECURSIVE r AS (SELECT 1 AS i, 1 AS factorial UNION SELECT i+1 AS i, factorial * (i+1) AS factorial FROM r WHERE i<=19) SELECT * FROM r;
+ОШИБКА:  целое вне диапазона
+postgres=# WITH RECURSIVE r AS (SELECT 1 AS i, 1 AS factorial UNION SELECT i+1 AS i, factorial * (i+1) AS factorial FROM r WHERE i<=19) SELECT * FROM r;
+ОШИБКА:  целое вне диапазона
+postgres=# WITH RECURSIVE r AS (SELECT 1 AS i, 1 AS factorial UNION SELECT i+1 AS i, factorial * (i+1) AS factorial FROM r WHERE i<=10) SELECT * FROM r;
+ i  | factorial
+----+-----------
+  1 |         1
+  2 |         2
+  3 |         6
+  4 |        24
+  5 |       120
+  6 |       720
+  7 |      5040
+  8 |     40320
+  9 |    362880
+ 10 |   3628800
+ 11 |  39916800
+(11 строк)
+
+
+postgres=# WITH RECURSIVE r AS (SELECT 1.0 AS i, 1.0 AS factorial UNION SELECT i+1 AS i, factorial * (i+1) AS factorial FROM r WHERE i< 19) SELECT * FROM r;
+  i   |               factorial
+------+----------------------------------------
+  1.0 |                                    1.0
+  2.0 |                                   2.00
+  3.0 |                                  6.000
+  4.0 |                                24.0000
+  5.0 |                              120.00000
+  6.0 |                             720.000000
+  7.0 |                           5040.0000000
+  8.0 |                         40320.00000000
+  9.0 |                       362880.000000000
+ 10.0 |                     3628800.0000000000
+ 11.0 |                   39916800.00000000000
+ 12.0 |                 479001600.000000000000
+ 13.0 |               6227020800.0000000000000
+ 14.0 |             87178291200.00000000000000
+ 15.0 |          1307674368000.000000000000000
+ 16.0 |        20922789888000.0000000000000000
+ 17.0 |      355687428096000.00000000000000000
+ 18.0 |    6402373705728000.000000000000000000
+ 19.0 | 121645100408832000.0000000000000000000
+(19 строк)
+
+
+postgres=#
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: dima
+Пароль пользователя dima:
+psql (11.5)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=> \!chcp 1251
+Неверная команда \!chcp. Справка по командам: \?
+postgres=> \! chcp 1251
+Текущая кодовая страница: 1251
+postgres=> DROP TABLE a;
+DROP TABLE
+postgres=> DROP TABLE geo_information;
+DROP TABLE
+postgres=> CREATE TABLE geo_information(id INTEGER, par_id INTEGER DEFAULT null, name TEXT);
+CREATE TABLE
+postgres=> INSERT INTO geo_information VALUES(1, null, 'Планета Земля');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(2, 1, 'Континент Евразия');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(3, 1, 'Континент Северная Америка');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(4, 2, 'Европа');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(5, 4, 'Россия');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(6, 4, 'Германия');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(7, 5, 'Москва');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(8, 5, 'Санкт-Петербург');
+INSERT 0 1
+postgres=> INSERT INTO geo_information VALUES(9, 6, 'Берлин');
+INSERT 0 1
+postgres=> SELECT * FROM geo_information;
+ id | par_id |            name
+----+--------+----------------------------
+  1 |        | Планета Земля
+  2 |      1 | Континент Евразия
+  3 |      1 | Континент Северная Америка
+  4 |      2 | Европа
+  5 |      4 | Россия
+  6 |      4 | Германия
+  7 |      5 | Москва
+  8 |      5 | Санкт-Петербург
+  9 |      6 | Берлин
+(9 строк)
+
+
+postgres=> WITH RECURSIVE information(id, par_id, name) AS (SELECT id, par_id, name FROM geo_information WHERE name = 'Европа' UNION ALL SELECT id, par_id, name FROM geo_information WHERE name = 'Россия' UNION ALL SELECT id, par_id, name FROM geo_information WHERE name = 'Германия' UNION ALL SELECT id, par_id, name FROM geo_information WHERE name = 'Москва' UNION ALL SELECT id, par_id, name FROM geo_information WHERE name = 'Санкт-Петербург' UNION ALL SELECT id, par_id, name FROM geo_information WHERE name = 'Берлин') SELECT * FROM information;
+ id | par_id |      name
+----+--------+-----------------
+  4 |      2 | Европа
+  5 |      4 | Россия
+  6 |      4 | Германия
+  7 |      5 | Москва
+  8 |      5 | Санкт-Петербург
+  9 |      6 | Берлин
+(6 строк)
+
+
+3) postgres=> WITH RECURSIVE requests(id, par_id, name) AS (SELECT id, par_id, name FROM geo_information WHERE id = 5 UNION ALL SELECT id, par_id, name FROM geo_information WHERE id = 8) SELECT * FROM requests;
+ id | par_id |      name
+----+--------+-----------------
+  5 |      4 | Россия
+  8 |      5 | Санкт-Петербург
+(2 строки)
+
+
+postgres=> SELECT * FROM requests;
+ОШИБКА:  отношение "requests" не существует
+СТРОКА 1: SELECT * FROM requests;
+
+4 - 5) postgres=> WITH RECURSIVE producer_male(name) AS(SELECT name FROM producers p WHERE sex = 'Male' UNION ALL SELECT movie FROM producers, (SELECT producer, name FROM movie WHERE budget > 1000000) AS _movie WHERE producers.movie = _movie.name) SELECT * FROM producer_male;
+  name
+---------
+ Petorv
+ Aeterna
+ Begin
+ Lion
+(4 строки)
+6) postgres=> SELECT year FROM movie GROUP BY year, budget HAVING COUNT(year) > 2 AND movie. budget > 300000;
+ year
+------
+(0 строк)
+7) postgres=> SELECT producer FROM movie WHERE actors_counts > 5;
+ producer
+----------
+ Petorv
+ Petorva
+ Nolan
+(3 строки)
+8) postgres=> WITH RECURSIVE actors(name, movies_counts) AS (SELECT name, movies_counts FROM actor WHERE movies_counts = 3 UNION ALL SELECT name, movies_counts FROM actor WHERE movies_counts = 4 UNION ALL SELECT name, movies_counts FROM actor WHERE movies_counts = 5 UNION ALL SELECT name, movies_counts FROM actor WHERE movies_counts = 6 UNION ALL SELECT name, movies_counts FROM actor WHERE movies_counts = 7) SELECT * FROM actors;
+  name  | movies_counts
+--------+---------------
+ Tix    |             4
+ Victor |             5
+ Max    |             6
+(3 строки)

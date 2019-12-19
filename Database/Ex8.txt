@@ -1,0 +1,11 @@
+1) SELECT surname, name FROM producer WHERE best_movie_year = 2000;
+2) SELECT surname, name FROM producer WHERE counter > 5;
+3)  SELECT name FROM movie WHERE actors_counts > 10;
+4)  SELECT name FROM movie WHERE country = 'USA' GROUP BY name ORDER BY mark DESC;
+5) SELECT name FROM movies AS m WHERE EXISTS (SELECT name FROM actors WHERE motherland = 'England' AND m.actor = name);
+6) SELECT name, surname FROM actors AS a WHERE EXISTS(SELECT * FROM producer WHERE motherland = 'England' AND m.producer = name AND year_of_movie > 2007 AND year_of_movie < 2010);
+7) SELECT AVG(budget) FROM movie WHERE year < 2000;
+SELECT AVG(budget) FROM movie WHERE year > 2000 AND year < 2005;
+SELECT AVG(budget) FROM movie WHERE year > 2005 AND year < 2010;
+SELECT AVG(budget) FROM movie WHERE year > 2010;
+12) SELECT name, surname FROM producer AS p WHERE EXISTS (SELECT * FROM movie WHERE movie_year < 2000 AND p.movie_name = name AND p.count = 10);

@@ -1,0 +1,143 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: dima
+Пароль пользователя dima:
+psql (11.5)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=> \! chcp 1251
+Текущая кодовая страница: 1251
+postgres=> DROP DATABASE films;
+DROP DATABASE
+postgres=> CREATE DATABASE films;
+CREATE DATABASE
+postgres=> CREATE TABLE person();
+CREATE TABLE
+postgres=> CREATE TABLE movies(name TEXT, description TEXT, year INTEGER, genres TEXT, country TEXT, budget INTEGER, PRIMARY KEY(name, year), CHECK(year > 1900 AND year < 2029), CHECK(budget >= 10000));
+CREATE TABLE
+postgres=> CREATE TABLE movies(name TEXT, description TEXT, year INTEGER, genres TEXT, country TEXT, budget INTEGER, PRIMARY KEY(name, year), CHECK(year > 1900 AND year < 2029), CHECK(budget >= 10000)) INHERITS(person);
+ОШИБКА:  отношение "movies" уже существует
+postgres=> DROP TABLE movies;
+DROP TABLE
+postgres=> CREATE TABLE movies(name TEXT, description TEXT, year INTEGER, genres TEXT, country TEXT, budget INTEGER, PRIMARY KEY(name, year), CHECK(year > 1900 AND year < 2029), CHECK(budget >= 10000)) INHERITS(person);
+CREATE TABLE
+postgres=> CREATE TABLE actors(surname TEXT UNIQUE, name TEXT UNIQUE, birthday DATE UNIQUE, motherland TEXT, number_of_movies INTEGER, count SERIAL, CHECK(number_of_movies > 5)) INHERITS(person);
+CREATE TABLE
+postgres=> CREATE TABLE producer(surname TEXT, name TEXT, birthday DATE, motherland TEXT DEFAULT('USA'), counter SERIAL) INHERITS(person);
+CREATE TABLE
+postgres=> DROP TABLE movies;
+DROP TABLE
+postgres=> CREATE TABLE movies(name TEXT, description TEXT, year INTEGER, genres TEXT, country TEXT, budget INTEGER, PRIMARY KEY(name, year), CHECK(year > 1900 AND year < 2029), CHECK(budget >= 10000));
+CREATE TABLE
+postgres=> INSERT INTO movies VALUES('War', 'War', 1980, 'War', 'Russia', 15000);
+INSERT 0 1
+postgres=> INSERT INTO movies VALUES('Joker', 'Thriller', 2019, 'Thriller', 'USA', 15001);
+INSERT 0 1
+postgres=> INSERT INTO movies VALUES('Begin', 'Thriller', 2017, 'Thriller', 'USA', 15002);
+INSERT 0 1
+postgres=> INSERT INTO movies VALUES('Wife', 'Comedy', 2015, 'Comedy', 'USA', 15003);
+INSERT 0 1
+postgres=> INSERT INTO movies VALUES('Magic', 'Fantasy', 1947, 'Fantasy', 'China', 15004);
+INSERT 0 1
+postgres=> INSERT INTO movies VALUES('Joke', 'Comedy', 1958, 'Comedy', 'India', 15005);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Petrov', 'Alex', 30.05.1987, 'Russia', 20);
+ОШИБКА:  ошибка синтаксиса (примерное положение: ".1987")
+СТРОКА 1: INSERT INTO actors VALUES('Petrov', 'Alex', 30.05.1987, 'Rus...
+                                                           ^
+postgres=> INSERT INTO actors VALUES('Petrov', 'Alex', 05.1987, 'Russia', 20);
+ОШИБКА:  столбец "birthday" имеет тип date, а выражение - numeric
+СТРОКА 1: INSERT INTO actors VALUES('Petrov', 'Alex', 05.1987, 'Russia...
+                                                      ^
+ПОДСКАЗКА:  Перепишите выражение или преобразуйте его тип.
+postgres=> DROP TABLE actors;
+DROP TABLE
+postgres=> CREATE TABLE actors(surname TEXT UNIQUE, name TEXT UNIQUE, birthday TEXT UNIQUE, motherland TEXT, number_of_movies INTEGER, count SERIAL, CHECK(number_of_movies > 5)) INHERITS(person);
+CREATE TABLE
+postgres=> DROP TABLE producer;
+DROP TABLE
+postgres=> CREATE TABLE producer(surname TEXT, name TEXT, birthday TEXT, motherland TEXT DEFAULT('USA'), counter SERIAL) INHERITS(person);
+CREATE TABLE
+postgres=> INSERT INTO actors VALUES('Petrov', 'Alex', '20.05.1987', 'Russia', 20);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Loskov', 'Oleg', '21.04.1980', 'Russia', 6);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Smith', 'Jim', '21.04.1990', 'USA', 134);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Adam', 'Len', '26.03.1976', 'Germany', 10);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Jacob', 'Fix', '26.03.1998', 'Slovakia', 7);
+INSERT 0 1
+postgres=> INSERT INTO actors VALUES('Petrova', 'Lucia', '17.08.1990', 'Russia', 16);
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Petrov', 'Jim', '17.08.1990', 'Russia');
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Luch', 'Joke', '17.08.1990', 'Finland');
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Smith', 'Joke', '08.03.1987', 'Canada');
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Aeterna', 'Lux', '01.01.1964', 'USA');
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Igor', 'Sting', '05.10.1977', 'USA');
+INSERT 0 1
+postgres=> INSERT INTO producer VALUES('Join', 'Xim', '09.10.1929', 'Japan');
+INSERT 0 1
+postgres=> \d
+                       Список отношений
+ Схема  |         Имя          |        Тип         | Владелец
+--------+----------------------+--------------------+----------
+ public | actors               | таблица            | dima
+ public | actors_count_seq     | последовательность | dima
+ public | cinema               | таблица            | lena
+ public | films                | таблица            | lena
+ public | movies               | таблица            | dima
+ public | person               | таблица            | dima
+ public | producer             | таблица            | dima
+ public | producer_counter_seq | последовательность | dima
+ public | weather              | таблица            | postgres
+(9 строк)
+
+
+postgres=> SELECT * FROM movies;
+ name  | description | year |  genres  | country | budget
+-------+-------------+------+----------+---------+--------
+ War   | War         | 1980 | War      | Russia  |  15000
+ Joker | Thriller    | 2019 | Thriller | USA     |  15001
+ Begin | Thriller    | 2017 | Thriller | USA     |  15002
+ Wife  | Comedy      | 2015 | Comedy   | USA     |  15003
+ Magic | Fantasy     | 1947 | Fantasy  | China   |  15004
+ Joke  | Comedy      | 1958 | Comedy   | India   |  15005
+(6 строк)
+
+
+postgres=> SELECT * FROM actors;
+ surname | name  |  birthday  | motherland | number_of_movies | count
+---------+-------+------------+------------+------------------+-------
+ Petrov  | Alex  | 20.05.1987 | Russia     |               20 |     1
+ Loskov  | Oleg  | 21.04.1980 | Russia     |                6 |     2
+ Smith   | Jim   | 21.04.1990 | USA        |              134 |     3
+ Adam    | Len   | 26.03.1976 | Germany    |               10 |     4
+ Jacob   | Fix   | 26.03.1998 | Slovakia   |                7 |     5
+ Petrova | Lucia | 17.08.1990 | Russia     |               16 |     6
+(6 строк)
+
+
+postgres=> SELECT * FROM producer;
+ surname | name  |  birthday  | motherland | counter
+---------+-------+------------+------------+---------
+ Petrov  | Jim   | 17.08.1990 | Russia     |       1
+ Luch    | Joke  | 17.08.1990 | Finland    |       2
+ Smith   | Joke  | 08.03.1987 | Canada     |       3
+ Aeterna | Lux   | 01.01.1964 | USA        |       4
+ Igor    | Sting | 05.10.1977 | USA        |       5
+ Join    | Xim   | 09.10.1929 | Japan      |       6
+(6 строк)
+
+
+postgres=>
