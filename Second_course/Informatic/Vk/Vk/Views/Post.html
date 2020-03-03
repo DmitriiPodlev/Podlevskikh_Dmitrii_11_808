@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Придумай пост!</title>
+</head>
+<body>
+    <form action="/Home/AddEntry/" method="post" enctype="multipart/form-data">
+        Наименование: <input name="name" /> <br /><br />
+        Текст: <textarea name="text"></textarea> <br /><br />
+        Картинка: <input name="image" type="file" accept="image/*" /> <br /><br />
+        <input type="submit" value = "Отправить"/>
+    </form>
+</body>
+</html>
