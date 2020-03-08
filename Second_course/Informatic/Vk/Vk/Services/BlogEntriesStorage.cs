@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,13 +10,23 @@ namespace Vk.Services
     public class BlogEntriesStorage : IStorage
     {
         public IEnumerable<Post> BlogEntries { get; set; }
-        public void Load()
+        public List<Dictionary<string, string>> Load(HttpContext context)
         {
-
+            throw new NotImplementedException();
         }
-        public void Save()
+        public Task Save(HttpContext context)
         {
+            throw new NotImplementedException();
+        }
 
+        public void Remove(HttpContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(HttpContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }
