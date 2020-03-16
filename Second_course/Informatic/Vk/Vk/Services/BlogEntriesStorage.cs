@@ -14,7 +14,7 @@ namespace Vk.Services
         {
             throw new NotImplementedException();
         }
-        public Task Save(HttpContext context)
+        public Task<string> Save(HttpContext context)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace Vk.Services
             throw new NotImplementedException();
         }
 
-        public void Edit(HttpContext context)
+        public string Edit(HttpContext context)
         {
             throw new NotImplementedException();
         }

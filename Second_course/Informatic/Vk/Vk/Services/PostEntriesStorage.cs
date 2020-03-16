@@ -32,38 +32,43 @@ namespace Vk.Services
             return loader;
         }
         // сохранение
-        public async Task Save(HttpContext context)
+        public async Task<string> Save(HttpContext context)
         {
             var filePath = "Files";
 
             var post = new Post();
-            var fileCount = Directory.GetFiles(filePath, "*.txt", SearchOption.AllDirectories).Length;
-            fileCount++;
-
-            foreach (var formFile in context.Request.Form.Files)
-            {
-                if (formFile.Length > 0)
-                {
-                    string newFile = Path.Combine(filePath, fileCount + Path.GetExtension(formFile.FileName));
-                    using (var inputStream = new FileStream(newFile, FileMode.Create))
-                    {
-                        // read file to stream
-                        await formFile.CopyToAsync(inputStream);
-                        // stream to byte array
-                        byte[] array = new byte[inputStream.Length];
-                        inputStream.Seek(0, SeekOrigin.Begin);
-                        inputStream.Read(array, 0, array.Length);
-                        // get file name
-                        string fName = formFile.FileName;
-                    }
-                }
-            }
-
             post.Name = context.Request.Form["name"];
             post.Text = context.Request.Form["text"];
             post.Date = DateTime.Now.ToShortDateString();
-            var txtFileName = Path.Combine(filePath, fileCount + ".txt");
-            File.AppendAllLines(txtFileName, new string[] { post.Name, post.Text, post.Date });
+            var fileCount = Directory.GetFiles(filePath, "*.txt", SearchOption.AllDirectories).Length;
+            fileCount++;
+
+            var validation = Validation.Validation.Validate(post);
+            if (validation.IsValid)
+            {
+                foreach (var formFile in context.Request.Form.Files)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        string newFile = Path.Combine(filePath, fileCount + Path.GetExtension(formFile.FileName));
+                        using (var inputStream = new FileStream(newFile, FileMode.Create))
+                        {
+                            // read file to stream
+                            await formFile.CopyToAsync(inputStream);
+                            // stream to byte array
+                            byte[] array = new byte[inputStream.Length];
+                            inputStream.Seek(0, SeekOrigin.Begin);
+                            inputStream.Read(array, 0, array.Length);
+                            // get file name
+                            string fName = formFile.FileName;
+                        }
+                    }
+                }
+                var txtFileName = Path.Combine(filePath, fileCount + ".txt");
+                File.AppendAllLines(txtFileName, new string[] { post.Name, post.Text, post.Date });
+                return "Сохранено удачно!";
+            }
+            return validation.ErrMsg;
         }
         // удаление
         public void Remove(HttpContext context)
@@ -73,7 +78,7 @@ namespace Vk.Services
             File.Delete($"Files/{id}.png");
         }
         // редактирование
-        public void Edit(HttpContext context)
+        public string Edit(HttpContext context)
         {
             var id = context.Request.Path.Value.Split('/').Last();
             var post = new Post();
@@ -81,8 +86,15 @@ namespace Vk.Services
             post.Name = context.Request.Form["name"];
             post.Text = context.Request.Form["text"];
             post.Date = DateTime.Now.ToShortDateString();
-            var txtFileName = Path.Combine("Files", id + ".txt");
-            File.WriteAllLines(txtFileName, new string[] { post.Name, post.Text, post.Date });
+            var validation = Validation.Validation.Validate(post);
+
+            if (validation.IsValid)
+            {
+                var txtFileName = Path.Combine("Files", id + ".txt");
+                File.WriteAllLines(txtFileName, new string[] { post.Name, post.Text, post.Date });
+                return "Отредактировано удачно!";
+            }
+            return validation.ErrMsg;
         }
     }
 }
