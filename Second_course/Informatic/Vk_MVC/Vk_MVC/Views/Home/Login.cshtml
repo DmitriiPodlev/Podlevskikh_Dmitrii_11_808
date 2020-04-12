@@ -1,0 +1,29 @@
+﻿@model Vk_MVC.Models.Register
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Регистрация:</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                Имя:
+                <br>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Пароль:
+                <br>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Регистрация" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
