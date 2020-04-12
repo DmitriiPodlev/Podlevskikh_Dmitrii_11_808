@@ -11,5 +11,6 @@ namespace Vk_MVC.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public List<Post> Posts { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }
