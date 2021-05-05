@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <title>All links</title>
 </head>
-<body>
+<body class="container">
+<a href="{% url 'shortUrls:index' %}">Back</a>
 {% if url_list %}
-  <ul>
+<h2>All links</h2>
+ <table>
+   <thead><th>Short url</th><th>Original url</th><th></th></thead>
     {% for e in url_list %}
-    <li>
-      {{e.short_url}}
-    </li>
+    <tr>
+       <td>{{ e.short_url }}</td>
+            <td>{{ e.original_url }}</td>
+            <td>
+      <form action="{% url 'shortUrls:delete' e.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+      </form>
+      </td>
+      </tr>
     {% endfor %}
-  </ul>
+ </table>
 {% else %}
 <p>There aren't any urls.</p>
 {% endif %}

@@ -1,10 +1,17 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect
 from .models import Url
+from django.urls import reverse
 
 
 def index(request):
-    return HttpResponse('Index page!')
+    if request.method == 'POST':
+        url = Url()
+        url.original_url = request.POST['urlName']
+        url.save()
+        return HttpResponseRedirect(reverse('shortUrls:links'))
+    else:
+        return render(request, 'shortUrls/index.html')
 
 
 def links(request):
@@ -15,6 +22,8 @@ def links(request):
     return render(request, 'shortUrls/links.html', context)
 
 
-def delete(request, url_id):
-    url = get_object_or_404(Url, pk=url_id)
-    return
+def delete(request, id):
+    url = get_object_or_404(Url, pk=id)
+    url.delete()
+    return HttpResponseRedirect(reverse('shortUrls:links'))
+

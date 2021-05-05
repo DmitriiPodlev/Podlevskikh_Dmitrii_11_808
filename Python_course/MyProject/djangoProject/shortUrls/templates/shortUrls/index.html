@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <title>Create Short Url!</title>
 </head>
-<body>
-{% %}
+<body class="container">
+<form action="{% url 'shortUrls:index' %}" method="post">
+        {% csrf_token %}
+    <label>Input url:</label><br>
+            <input type="text" name="urlName" />
+        <input type="submit" value="Generate">
+</form>
+<a href="{% url 'shortUrls:links' %}">All links</a>
 </body>
 </html>
