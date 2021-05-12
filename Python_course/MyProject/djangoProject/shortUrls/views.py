@@ -5,13 +5,14 @@ from django.urls import reverse
 
 
 def index(request):
+    url = Url()
     if request.method == 'POST':
-        url = Url()
         url.original_url = request.POST['urlName']
+        url.short_url = "short"
         url.save()
-        return HttpResponseRedirect(reverse('shortUrls:links'))
+        return HttpResponseRedirect(reverse('shortUrls:index'))
     else:
-        return render(request, 'shortUrls/index.html')
+        return render(request, 'shortUrls/index.html', {'url': url})
 
 
 def links(request):

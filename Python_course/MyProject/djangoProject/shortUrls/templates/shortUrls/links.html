@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style type="text/css">
+body {
+    text-align: center;
+}
+table {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+</style>
     <meta charset="UTF-8">
-    <title>All links</title>
+    <title>Links</title>
 </head>
-<body class="container">
-<a href="{% url 'shortUrls:index' %}">Back</a>
+<body>
 {% if url_list %}
 <h2>All links</h2>
  <table>
@@ -26,5 +36,6 @@
 {% else %}
 <p>There aren't any urls.</p>
 {% endif %}
+<a href="{% url 'shortUrls:index' %}">Back</a>
 </body>
 </html>

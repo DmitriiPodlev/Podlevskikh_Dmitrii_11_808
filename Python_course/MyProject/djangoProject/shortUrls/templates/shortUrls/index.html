@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style type="text/css">
+body {
+    text-align: center;
+}
+form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+</style>
     <meta charset="UTF-8">
-    <title>Create Short Url!</title>
+    <title>Create</title>
 </head>
-<body class="container">
+<body>
 <form action="{% url 'shortUrls:index' %}" method="post">
         {% csrf_token %}
-    <label>Input url:</label><br>
+    <label><h2>Input url:</h2></label><br>
             <input type="text" name="urlName" />
+    {% if url.original_url != "" %}
+    <label>{{ url.short_url }}</label>
+    {% endif %}
         <input type="submit" value="Generate">
 </form>
+<br>
+<br>
 <a href="{% url 'shortUrls:links' %}">All links</a>
 </body>
 </html>
