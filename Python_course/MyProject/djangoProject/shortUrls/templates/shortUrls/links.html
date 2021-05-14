@@ -11,6 +11,10 @@ table {
     margin-right: auto;
     text-align: center;
 }
+.description {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
 </style>
     <meta charset="UTF-8">
     <title>Links</title>
@@ -22,20 +26,25 @@ table {
    <thead><th>Short url</th><th>Original url</th><th></th></thead>
     {% for e in url_list %}
     <tr>
-       <td>{{ e.short_url }}</td>
-            <td>{{ e.original_url }}</td>
-            <td>
-      <form action="{% url 'shortUrls:delete' e.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-      </form>
-      </td>
-      </tr>
+        <form action="{% url 'shortUrls:count' e.id %}" method="post">
+            {% csrf_token %}
+            <td><a href="{{ e.short_url }}">{{ e.short_url }}</a></td>
+            <td><div class = description><a href="{{ e.original_url }}">{{ e.original_url }}</a></div></td>
+        </form>
+        <td>
+            <form action="{% url 'shortUrls:delete' e.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
     {% endfor %}
  </table>
 {% else %}
 <p>There aren't any urls.</p>
 {% endif %}
+<br>
+<br>
 <a href="{% url 'shortUrls:index' %}">Back</a>
 </body>
 </html>

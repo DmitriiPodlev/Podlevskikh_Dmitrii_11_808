@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .models import Url
 
-
+# tests in progress
 class UrlModelTest(TestCase):
 
     def test_was_published_with_lowest_frequency(self):
