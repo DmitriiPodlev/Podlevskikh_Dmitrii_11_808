@@ -21,11 +21,13 @@ form {
         {% csrf_token %}
     <label><h2>Input url:</h2></label><br>
             <input type="text" name="urlName" />
-    {% if url.original_url != "" %}
-    <label>{{ url.short_url }}</label>
-    {% endif %}
         <input type="submit" value="Generate">
 </form>
+{% if url != None %}
+    <br>
+    <br>
+    <label><a href="{% url 'shortUrls:count' url.id %}">{{ url.short_url }}</a></label>
+{% endif %}
 <br>
 <br>
 <a href="{% url 'shortUrls:links' %}">All links</a>

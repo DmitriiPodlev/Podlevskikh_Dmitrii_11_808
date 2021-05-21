@@ -26,11 +26,8 @@ table {
    <thead><th>Short url</th><th>Original url</th><th></th></thead>
     {% for e in url_list %}
     <tr>
-        <form action="{% url 'shortUrls:count' e.id %}" method="post">
-            {% csrf_token %}
-            <td><a href="{{ e.short_url }}">{{ e.short_url }}</a></td>
-            <td><div class = description><a href="{{ e.original_url }}">{{ e.original_url }}</a></div></td>
-        </form>
+        <td><a href="{% url 'shortUrls:count' e.id %}">{{ e.short_url }}</a></td>
+        <td><div class = description><a href="{% url 'shortUrls:count' e.id %}">{{ e.original_url }}</a></div></td>
         <td>
             <form action="{% url 'shortUrls:delete' e.id %}" method="post">
                 {% csrf_token %}

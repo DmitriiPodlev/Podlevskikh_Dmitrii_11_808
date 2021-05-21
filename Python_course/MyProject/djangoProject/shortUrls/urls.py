@@ -12,5 +12,5 @@ urlpatterns = [
     #/shortUrls/id/delete/
     path('<int:id>/delete/', views.delete, name='delete'),
     #/shortUrls/id/count/
-    path('<int:id>/count/', views.increase_by_one, name='count')
+    path('<int:id>/count/', views.count, name='count')
 ]

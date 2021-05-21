@@ -1,9 +1,17 @@
-import hashlib
+from hashids import Hashids
 import os
 
-"""
-hash-code in progress
-"""
-def hash_url(url):
-    salt = os.urandom(32)
-    key = hashlib.pbkdf2_hmac('sha256', url.encode('utf-8'), salt, 100000)
+
+class Hash:
+    dict = {}
+
+    def hash_url(self, url, id):
+        salt = os.urandom(32)
+        hashids = Hashids(salt=str(salt))
+        key = hashids.encode(id)
+        short_url = "https://" + key
+        self.dict[short_url] = url
+        return short_url
+
+    def decode_url(self, short_url):
+        return self.dict[short_url]
