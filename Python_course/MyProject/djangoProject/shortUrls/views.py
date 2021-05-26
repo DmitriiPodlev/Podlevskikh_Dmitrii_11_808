@@ -3,20 +3,26 @@ from django.http import HttpResponseRedirect
 from .models import Url
 from django.urls import reverse
 from .hash_dictionary import Hash
+from django.utils import timezone
 
 
 # create function
 def index(request):
     # if method is post, add data, else open this page
     if request.method == 'POST':
+        hash_dict = Hash()
         url = Url()
-        url.short_url = Hash.hash_url(Hash, request.POST['urlName'], 1)
+        url.short_url = hash_dict.hash_url(request.POST['urlName'], Url.objects.count() + 1)
+        url.original_url = request.POST['urlName']
+        url.date = timezone.now()
         url.save()
         return HttpResponseRedirect(reverse('shortUrls:index'))
     else:
-        url = Url.objects.latest('id')
-        if url.frequency == 0:
-            return render(request, 'shortUrls/index.html', {'url': url})
+        if Url.objects.count() == 0:
+            return render(request, 'shortUrls/index.html', {'url': None})
+        last_url = Url.objects.latest('id')
+        if last_url.was_published_recently():
+            return render(request, 'shortUrls/index.html', {'url': last_url})
         else:
             return render(request, 'shortUrls/index.html', {'url': None})
 
@@ -24,10 +30,11 @@ def index(request):
 # all links to list function
 def links(request):
     # order by frequency
+    hash_dict = Hash()
     url_list = Url.objects.order_by('-frequency')
-    for url in url_list:
-        url.original_url = Hash.decode_url(Hash, url.short_url)
-        url.save()
+    #for url in url_list:
+    #    url.original_url = hash_dict.decode_url(url.short_url)
+    #    url.save()
     return render(request, 'shortUrls/links.html', {'url_list': url_list})
 
 
@@ -40,8 +47,9 @@ def delete(request, id):
 
 # increase frequency of using url function
 def count(request, id):
+    hash_dict = Hash()
     url = get_object_or_404(Url, pk=id)
     url.frequency = url.frequency + 1
     url.save()
-    original_url = Hash.decode_url(Hash, url.short_url)
-    return HttpResponseRedirect(original_url)
+    #original_url = hash_dict.decode_url(url.short_url)
+    return HttpResponseRedirect(url.original_url)
