@@ -12,7 +12,7 @@ def index(request):
     if request.method == 'POST':
         hash_dict = Hash()
         url = Url()
-        url.short_url = hash_dict.hash_url(request.POST['urlName'], Url.objects.count() + 1)
+        url.short_url = hash_dict.hash_url(Url.objects.count() + 1)
         url.original_url = request.POST['urlName']
         url.date = timezone.now()
         url.save()
@@ -30,11 +30,7 @@ def index(request):
 # all links to list function
 def links(request):
     # order by frequency
-    hash_dict = Hash()
     url_list = Url.objects.order_by('-frequency')
-    #for url in url_list:
-    #    url.original_url = hash_dict.decode_url(url.short_url)
-    #    url.save()
     return render(request, 'shortUrls/links.html', {'url_list': url_list})
 
 
@@ -51,5 +47,4 @@ def count(request, id):
     url = get_object_or_404(Url, pk=id)
     url.frequency = url.frequency + 1
     url.save()
-    #original_url = hash_dict.decode_url(url.short_url)
     return HttpResponseRedirect(url.original_url)
