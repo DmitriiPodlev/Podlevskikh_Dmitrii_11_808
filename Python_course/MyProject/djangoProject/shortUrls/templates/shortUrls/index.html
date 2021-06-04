@@ -23,7 +23,7 @@ form {
             <input type="text" name="urlName" />
         <input type="submit" value="Generate">
 </form>
-{% if url != None %}
+{% if url != None and url != ""%}
     <br>
     <br>
     <label><a href="{% url 'shortUrls:count' url.id %}">{{ url.short_url }}</a></label>

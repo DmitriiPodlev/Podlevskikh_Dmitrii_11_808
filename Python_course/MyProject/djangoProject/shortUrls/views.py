@@ -18,9 +18,11 @@ def index(request):
         url.save()
         return HttpResponseRedirect(reverse('shortUrls:index'))
     else:
+        # if there aren't elements
         if Url.objects.count() == 0:
             return render(request, 'shortUrls/index.html', {'url': None})
         last_url = Url.objects.latest('id')
+        # check the date of url
         if last_url.was_published_recently():
             return render(request, 'shortUrls/index.html', {'url': last_url})
         else:
@@ -43,7 +45,6 @@ def delete(request, id):
 
 # increase frequency of using url function
 def count(request, id):
-    hash_dict = Hash()
     url = get_object_or_404(Url, pk=id)
     url.frequency = url.frequency + 1
     url.save()
