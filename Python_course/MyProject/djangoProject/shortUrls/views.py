@@ -33,6 +33,9 @@ def index(request):
 def links(request):
     # order by frequency
     url_list = Url.objects.order_by('-frequency')
+    for el in url_list:
+        if el.short_url == "":
+            url_list.remove(el)
     return render(request, 'shortUrls/links.html', {'url_list': url_list})
 
 

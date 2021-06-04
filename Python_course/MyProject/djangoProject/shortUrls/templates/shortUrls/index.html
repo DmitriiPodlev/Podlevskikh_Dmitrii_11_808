@@ -23,10 +23,15 @@ form {
             <input type="text" name="urlName" />
         <input type="submit" value="Generate">
 </form>
-{% if url != None and url != ""%}
+{% if url != None%}
     <br>
     <br>
     <label><a href="{% url 'shortUrls:count' url.id %}">{{ url.short_url }}</a></label>
+{% endif %}
+{% if url == ""%}
+    <br>
+    <br>
+    <label>Sorry, error in converting a short link</label>
 {% endif %}
 <br>
 <br>
