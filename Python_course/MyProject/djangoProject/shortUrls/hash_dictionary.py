@@ -14,5 +14,7 @@ class Hash:
         hashids = Hashids(salt=str(salt), min_length=4)
         # get key of hash
         key = hashids.encode(number)
+        if key == "":
+            return ""
         short_url = "https://" + key
         return short_url
